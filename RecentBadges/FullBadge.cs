@@ -9,13 +9,13 @@ namespace SoccerStats
 
 	public class RootObject
 	{
-		public string name { get; set; }
-		public string profile_name { get; set; }
-		public string profile_url { get; set; }
-		public string gravatar_url { get; set; }
-		public string gravatar_hash { get; set; }
+		public string Name { get; set; }
+		public string Profile_name { get; set; }
+		public string Profile_url { get; set; }
+		public string Gravatar_url { get; set; }
+		public string Gravatar_hash { get; set; }
 		public BadgeNew[] BadgeNew { get; set; }
-		public Points points { get; set; }
+		public Points Points { get; set; }
 	}
 
 	public class Points

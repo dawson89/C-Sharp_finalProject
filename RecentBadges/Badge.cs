@@ -22,7 +22,7 @@ namespace RecentBadges
 		[JsonProperty(PropertyName = "earned_date")]
 		public DateTime EarnedDate { get; set; }
 
-		public string FavoriteClass { get; set; }
+		public string ClassTopic { get; set; }
 	}
 
 }

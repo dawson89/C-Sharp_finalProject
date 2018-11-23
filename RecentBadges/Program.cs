@@ -42,9 +42,9 @@ namespace RecentBadges
 		//	SerializeBadgeToFile(customExportBadges, Path.Combine(directory.FullName, "recentbadges.json"));
 
 			string yes = "Y";
-			string no = "N";
+	//		string no = "N";
 
-			Console.Write("Would you like to view Dawson's recently earned badges?  Hint: Y or N ");
+			Console.Write("Would you like to view Dawson's recently earned badges?  (Hint: Enter Y or N) ");
 			string Answer = Console.ReadLine();
 			Answer = Answer.ToUpper();
 			if (Answer != yes)
@@ -61,7 +61,7 @@ namespace RecentBadges
 					{
 						var displayNumber = i + 1;
 						var badge = customImportBadges[i];
-						Console.WriteLine(displayNumber.ToString() + " ID: " + badge.Id + " Name: " + badge.Name + " Date Earned: " + badge.EarnedDate.ToShortDateString() + " Favorite: " + badge.FavoriteClass);
+						Console.WriteLine(displayNumber.ToString() + " ID: " + badge.Id + " Name: " + badge.Name + " Date Earned: " + badge.EarnedDate.ToShortDateString() + " Favorite: " + badge.ClassTopic);
 					}
 
 					Console.Write("To add/update/delete favorite information enter the number of the line you would like to select? ");
@@ -70,25 +70,21 @@ namespace RecentBadges
 					var indexAnswer = int.Parse(answerNo);
 					var goFind = indexAnswer - 1;
 
-					Console.Write("Badge ID Number: " + customImportBadges[goFind].Id + " Badge Name: " + customImportBadges[goFind].Name + " Favorite: " + customImportBadges[goFind].FavoriteClass);
-					customImportBadges[goFind].FavoriteClass = Console.ReadLine();
+					Console.Write("Badge ID Number: " + customImportBadges[goFind].Id + " Badge Name: " + customImportBadges[goFind].Name + " Favorite: " + customImportBadges[goFind].ClassTopic);
+					customImportBadges[goFind].ClassTopic = Console.ReadLine();
 					Console.WriteLine("Would like to make another change? ");
-					var AnswerTwo = Console.ReadLine();
-				if (AnswerTwo == "N")
-				{
-					break;
-				}
+					Answer = Console.ReadLine();
+				//if (AnswerTwo == "N")
+				//{
+				//	break;
+				//}
 
-
-
-
-				
 			}
-			while (Answer == no)
-			{
-				Console.WriteLine("then piss off");
-				break;
-			}
+			// while (Answer == no)
+			//{
+			//	Console.WriteLine("then piss off");
+			//	break;
+			//}
 
 			//Exports a new json file contain all changes that were made
 			fileName = Path.Combine(directory.FullName, "allbadges.json");
@@ -101,9 +97,6 @@ namespace RecentBadges
 			SerializeBadgeToFile(customExportBadges, fileName);
 		}
 
-
-		
-
 		public static List<Badge> DeserializeBadges(string fileName)
 		{
 			var badges = new List<Badge>();
@@ -113,7 +106,6 @@ namespace RecentBadges
 			using (var jsonReader = new JsonTextReader(reader))
 			{
 				badges = serializer.Deserialize<List<Badge>>(jsonReader);
-
 			}
 			return badges;
 		}
@@ -146,7 +138,7 @@ namespace RecentBadges
 		}
 
 		// Returns the ten most recent Badges Earned
-		public static List<Badge>GetCustomImportBadges(List<Badge> badges)
+		public static List<Badge> GetCustomImportBadges(List<Badge> badges)
 		{
 			Console.Write("How many badges do would you like to view?");
 			var ImportNumber = Console.ReadLine();
@@ -183,23 +175,6 @@ namespace RecentBadges
 			}
 			return customExportBadges;
 		}
-		
-		
-		
-		//public static List<Badge> GetBottomTwentyBadges(List<Badge> badges)
-		//{
-		//	var bottomTwentyBadges = new List<Badge>();
-		//	badges.Sort(new RecentBadge());
-		//	int counter = 0;
-		//	foreach (var badge in badges)
-		//	{
-		//		bottomTwentyBadges.Add(badge);
-		//		counter++;
-		//		if (counter == 20)
-		//			break;
-		//	}
-		//	return bottomTwentyBadges;
-		//}
 
 		public static void SerializeBadgeToFile(List<Badge> badges, string fileName)
 		{
